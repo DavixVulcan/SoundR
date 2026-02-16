@@ -65,8 +65,8 @@ def parse_note():
                 if msg.time != 0:
                     notelens.append(round(tick2second(msg.time, ticks_per_beat, tempo), 2))
                     notestart = False
-    print(notenames)
-    print(notelens)
+    # print(notenames)
+    # print(notelens)
     text.insert(tk.END, f"const char * {textfilename}[{len(notenames)}]\n{{\n")
     for i, string in enumerate(notenames):
         text.insert(tk.END, f'\t"{string}"')
@@ -115,9 +115,9 @@ def open_midi_file():
 root = tk.Tk()
 root.geometry("800x600")
 tk.Frame(root)
-photo = tk.PhotoImage(file = "music.png")
+# photo = tk.PhotoImage(file = "music.png")
 
-root.iconphoto(True, photo)
+# root.iconphoto(True, photo)
 
 listbox = Listbox(root, height = 10, 
                   width = 1, 
