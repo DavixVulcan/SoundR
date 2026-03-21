@@ -72,6 +72,9 @@ PiezoDriver::PiezoDriver(int pin, int channel)
     ledcSetup(channel, 100, 10);
     ledcAttachPin(pin, channel);
     ledcWrite(channel, 0);
+    note_counter = 0;
+    new_note = false;
+
 }
 void PiezoDriver::setNote(Note note)
 {
@@ -137,3 +140,27 @@ void PiezoDriver::piezoOn()
         ledcWriteTone(_channel, 0);
     }
 }
+
+void PiezoDriver::attachTimer(hw_timer_t* timer){
+    _timer = timer;
+}
+
+bool PiezoDriver::attachISR(void(*ISR)(void)){
+    timerAttachInterrupt(_timer, ISR, true);
+}
+
+void PiezoDriver::setSong(char ** notes_arr, float * notelengths_arr, int songlength){
+    notes = notes_arr;
+    notelengths = notelengths_arr;
+    song_length = songlength;
+}
+
+void PiezoDriver::playCounterNote(){
+    if(notes[note_counter][0] != 'x'){
+        setNoteViaName(notes[note_counter]);
+    }
+    timerAlarmWrite(_timer, (uint32_t)(1000000.0f * notelengths[note_counter]), false);
+    timerRestart(_timer);
+    timerAlarmEnable(_timer);
+}
+

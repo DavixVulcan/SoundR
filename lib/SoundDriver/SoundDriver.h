@@ -62,12 +62,28 @@ class PiezoDriver
     */
     void piezoOn();
 
+    void attachTimer(hw_timer_t* timer);
+    bool attachISR(void(*ISR)(void));
+    void setSong(char ** notes_arr, float * notelengths_arr, int songlength);
+    void playCounterNote();
+    
+    bool new_note;
+    int note_counter;
+
+    char ** notes;
+    float * notelengths;
+    int song_length;
+
+
     private:
     int _pin;
     int _channel;
     Note _note;
     uint32_t _freq;
     bool _tone_out;
+    hw_timer_t *_timer;
+
+    
 };
 
 #endif

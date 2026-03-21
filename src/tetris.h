@@ -1,4 +1,4 @@
-const char * Tetoris[75]
+char * Tetoris[75]
 {
 	"E5",
 	"x",
@@ -79,7 +79,7 @@ const char * Tetoris[75]
 
 const int Tetorislen = sizeof(Tetoris) / sizeof(Tetoris[0]);
 
-const float Tetoristimes[75]
+float Tetoristimes[75]
 {
 	0.2,
 	0.2,
