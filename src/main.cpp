@@ -7,37 +7,34 @@ PiezoDriver pdriver(18, 1);
 hw_timer_t *Timer0 = NULL;
 PiezoDriver *ref = &pdriver;
 
-void noteOneShot(const char * note) {
-  ref->setNoteViaName(note);
-}
+volatile bool tick = false;
 
 void IRAM_ATTR timer0ISR() {
-  pdriver.note_counter = (pdriver.note_counter + 1) % pdriver.song_length;
-  pdriver.new_note = true;
+  tick = true;
 }
 
 void setup() {
   Serial.begin(115200);
   Serial.print("Starting!");
+
   Timer0 = timerBegin(0, 80, true);
-  pdriver.setSong(Tetoris, Tetoristimes, Tetorislen);
-  pdriver.attachTimer(Timer0);
-  pdriver.attachISR(timer0ISR);
-  pdriver.playCounterNote();
+  timerAttachInterrupt(Timer0, timer0ISR, true);
+  
+
+  ref->attachTimer(Timer0);
+  ref->setSong(Tetoris, Tetoristimes, Tetorislen);
+  ref->playCounterNote();
 }
 
 void loop() {
-  if (pdriver.new_note) {
-    pdriver.new_note = false;
-    if (pdriver.note_counter >= Tetorislen) {
-      Serial.println("OUT OF BOUNDS!");
-      while(1);
-    }
+  // Serial.println("looping!Q");
+  if (tick) {
+    tick = false;
 
-    pdriver.toneOff();
-    pdriver.playCounterNote();
+    ref->toneOff();
+    ref->playCounterNote();
     
-    Serial.printf("idx=%d note=%s us=%u\n", pdriver.note_counter, Tetoris[pdriver.note_counter], (unsigned)(uint32_t)(1000000.0f * Tetoristimes[pdriver.note_counter]));
+    // Serial.printf("idx=%d note=%s us=%u\n", ref->note_counter, Tetoris[ref->note_counter], (unsigned)(uint32_t)(1000000.0f * Tetoristimes[ref->note_counter]));
   }
 }
 

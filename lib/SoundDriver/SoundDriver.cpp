@@ -145,10 +145,6 @@ void PiezoDriver::attachTimer(hw_timer_t* timer){
     _timer = timer;
 }
 
-bool PiezoDriver::attachISR(void(*ISR)(void)){
-    timerAttachInterrupt(_timer, ISR, true);
-}
-
 void PiezoDriver::setSong(char ** notes_arr, float * notelengths_arr, int songlength){
     notes = notes_arr;
     notelengths = notelengths_arr;
@@ -162,5 +158,6 @@ void PiezoDriver::playCounterNote(){
     timerAlarmWrite(_timer, (uint32_t)(1000000.0f * notelengths[note_counter]), false);
     timerRestart(_timer);
     timerAlarmEnable(_timer);
+    note_counter = (note_counter + 1) % song_length;
 }
 

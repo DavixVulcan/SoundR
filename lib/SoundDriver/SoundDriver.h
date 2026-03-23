@@ -62,9 +62,20 @@ class PiezoDriver
     */
     void piezoOn();
 
+    /**
+    * @brief Attaches a timer to the current class. Used by playCounterNote when resetting the timer
+    */
     void attachTimer(hw_timer_t* timer);
-    bool attachISR(void(*ISR)(void));
+
+    /**
+    * @brief Sets an array of song notes, note lengths, and song length to the class
+    */
     void setSong(char ** notes_arr, float * notelengths_arr, int songlength);
+
+    /**
+    * @brief Plays the note according to the current note_counter, then increments note counter.
+    *  Resets the timer to the appropriate note length. 
+    */
     void playCounterNote();
     
     bool new_note;
