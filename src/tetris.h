@@ -157,3 +157,13 @@ float Tetoristimes[75]
 	0.2,
 	0.2
 };
+
+const char * chords[2] = {
+	"E5",
+	"B4"
+};
+int chordlen = sizeof(chords) / sizeof(chords[0]);
+float chordtimes[2] = {
+	0.4,
+	0.4
+};
