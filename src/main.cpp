@@ -18,10 +18,9 @@ void setup() {
   Serial.print("Starting!");
 
   Timer0 = timerBegin(0, 80, true);
-  timerAttachInterrupt(Timer0, timer0ISR, true);
   
 
-  ref->attachTimer(Timer0);
+  ref->setupTimer(Timer0, timer0ISR);
   ref->setSong(Tetoris, Tetoristimes, Tetorislen);
   ref->playCounterNote();
 }
@@ -33,8 +32,6 @@ void loop() {
 
     ref->toneOff();
     ref->playCounterNote();
-    
-    // Serial.printf("idx=%d note=%s us=%u\n", ref->note_counter, Tetoris[ref->note_counter], (unsigned)(uint32_t)(1000000.0f * Tetoristimes[ref->note_counter]));
   }
 }
 

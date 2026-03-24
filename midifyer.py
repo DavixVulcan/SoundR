@@ -67,7 +67,7 @@ def parse_note():
                     notestart = False
     # print(notenames)
     # print(notelens)
-    text.insert(tk.END, f"const char * {textfilename}[{len(notenames)}]\n{{\n")
+    text.insert(tk.END, f"char * {textfilename}[{len(notenames)}]\n{{\n")
     for i, string in enumerate(notenames):
         text.insert(tk.END, f'\t"{string}"')
         if(i != len(notenames)-1):
@@ -75,9 +75,9 @@ def parse_note():
         text.insert(tk.END, f'\n')
     text.insert(tk.END, '};\n\n')
 
-    text.insert(tk.END, f'const int {textfilename}len = sizeof({textfilename}) / sizeof({textfilename}[0]);\n\n')
+    text.insert(tk.END, f'int {textfilename}len = sizeof({textfilename}) / sizeof({textfilename}[0]);\n\n')
 
-    text.insert(tk.END, f"const float {textfilename}times[{len(notelens)}]\n{{\n")
+    text.insert(tk.END, f"float {textfilename}times[{len(notelens)}]\n{{\n")
     for i, time in enumerate(notelens):
         text.insert(tk.END, f'\t{time}')
         if(i != len(notelens)-1):

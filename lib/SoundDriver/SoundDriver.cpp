@@ -141,8 +141,9 @@ void PiezoDriver::piezoOn()
     }
 }
 
-void PiezoDriver::attachTimer(hw_timer_t* timer){
+void PiezoDriver::setupTimer(hw_timer_t* timer, void ISR(void)){
     _timer = timer;
+    timerAttachInterrupt(_timer, ISR, true);
 }
 
 void PiezoDriver::setSong(char ** notes_arr, float * notelengths_arr, int songlength){
