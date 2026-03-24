@@ -70,7 +70,7 @@ class PiezoDriver
     /**
     * @brief Sets an array of song notes, note lengths, and song length to the class
     */
-    void setSong(char ** notes_arr, float * notelengths_arr, int songlength);
+    void setSong(const char ** notes_arr, float * notelengths_arr, int songlength);
 
     /**
     * @brief Plays the note according to the current note_counter, then increments note counter.
@@ -81,7 +81,7 @@ class PiezoDriver
     bool new_note;
     int note_counter;
 
-    char ** notes;
+    const char ** notes;
     float * notelengths;
     int song_length;
 
