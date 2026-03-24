@@ -19,14 +19,12 @@ void setup() {
 
   Timer0 = timerBegin(0, 80, true);
   
-
   ref->setupTimer(Timer0, timer0ISR);
   ref->setSong(Tetoris, Tetoristimes, Tetorislen);
   ref->playCounterNote();
 }
 
 void loop() {
-  // Serial.println("looping!Q");
   if (tick) {
     tick = false;
 

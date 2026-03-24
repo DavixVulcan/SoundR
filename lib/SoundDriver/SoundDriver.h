@@ -63,7 +63,7 @@ class PiezoDriver
     void piezoOn();
 
     /**
-    * @brief Attaches a timer to the current class. Used by playCounterNote when resetting the timer. Also attaches ISR to timer
+    * @brief Attaches a timer to the current class. For esp32, must be a timer with an 80 divider. Used by playCounterNote when resetting the timer. Also attaches ISR to timer
     */
     void setupTimer(hw_timer_t* timer, void ISR(void));
 

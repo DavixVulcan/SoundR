@@ -3,7 +3,7 @@
 #include "SoundDriver.h"
 #include <string.h>
 
-// All notes in frequency (Hz)
+// All notes in frequency (Hz)tbh the only vibe coded thing cause i cant be bothered to transcribe the hz table
 Note notelist[48] =
 {
     // ----- Octave 3 -----
